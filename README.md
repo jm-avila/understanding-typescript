@@ -11,4 +11,3 @@ Core Types
 
 The core primitive types in TypeScript are all lowercase!
 Example: It is string, NOT String.
-.
