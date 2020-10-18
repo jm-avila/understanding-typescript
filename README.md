@@ -162,3 +162,114 @@ Union
     let number: (string | number) = 1
     number = "1"
 ```
+
+## The Compiler
+
+tsc fileName
+
+tsc fileName -w
+
+### Generate config file
+
+tsc --init
+
+Note: Once a tsconfig.json has been generated you can use tsc to compile all the project.
+
+Important Options:
+
+- target: ECMAScript target version
+  - es6: is the equivalent to setting the lib options found under the lib bullet.
+- module: module code generation
+- lib: library files to be included in the compilation
+  - dom: DOM Iterable APIs
+  - es6
+  - dom.iterable: DOM Iterable APIs
+  - scripthost: Windows Script Host APIS
+- outDir: Redirect output structure to the directory
+- rootDir: root directory of input files
+
+## Interfaces
+
+Interfaces are capable of describing the wide range of shapes that JavaScript objects can take.
+
+```
+    interface Person {
+        firstName: string;
+        lastName: string;
+        age: number;
+    }
+```
+
+### Optional Properties
+
+Not all properties of an interface may be required.
+
+Optional properties are denoted by a ? at the end of the property name in the declaration.
+
+```
+    interface Person {
+        firstName: string;
+        lastName: string;
+        nickname?: string;
+        age: number;
+    }
+```
+
+### Readonly properties
+
+Some properties should only be modifiable when an object is first created. You can specify this by putting readonly before the name of the property.
+
+```
+    interface Person {
+        firstName: string;
+        lastName: string;
+        nickname?: string;
+        age: number;
+        readonly birthdate: string;
+    }
+```
+
+### Readonly Arrays
+
+TypeScript comes with a ReadonlyArray<TYPE> type with all mutating methods removed.
+
+Even assigning the entire ReadonlyArray back to a normal array is illegal. Unless overriden with a type assertion.
+
+```
+    const listA: number[] = [1,2,3,4];
+    let listB: ReadonlyArray<number> = listA;
+    listA = listB as number[];
+```
+
+### Function Types
+
+Interfaces are also capable of describing function types.
+
+To describe a function type with an interface, we give the interface a call signature. This is like a function declaration with only the parameter list and return type given.
+
+```
+    interface Greeter {
+        (text: string): void
+    }
+
+    let greeter: Greeter = (msg) => console.log(msg)
+```
+
+### Indexable Types
+
+We can also describe types that we can “index into”. Indexable types have an index signature that describes the types we can use to index into the object, along with the corresponding return types when indexing.
+
+```
+    interface StrArray {
+        [index: number]: string;
+    }
+
+    let myArray: StrArray;
+    myArray = ["Bob", "Marley"];
+```
+
+Above, the interface has an index signature.
+
+There are two types of supported index signatures: string and number. It is possible to support both types of indexers, but the type returned from a numeric indexer must be a subtype of the type returned from the string indexer. This is because when indexing with a number, JavaScript will actually convert that to a string before indexing into an object.
+
+While string index signatures are a powerful way to describe the “dictionary” pattern, they also enforce that all properties match their return type. This is because a string index declares that obj.property is also available as obj["property"].
