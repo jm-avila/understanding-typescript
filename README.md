@@ -273,3 +273,50 @@ Above, the interface has an index signature.
 There are two types of supported index signatures: string and number. It is possible to support both types of indexers, but the type returned from a numeric indexer must be a subtype of the type returned from the string indexer. This is because when indexing with a number, JavaScript will actually convert that to a string before indexing into an object.
 
 While string index signatures are a powerful way to describe the “dictionary” pattern, they also enforce that all properties match their return type. This is because a string index declares that obj.property is also available as obj["property"].
+
+## Advanced Types
+
+- Union Types
+- Intersection Types
+- Type Guards
+- Discriminated Unions
+- Type Casting
+- Function Overloads
+
+### Union Types
+
+A union type describes a value that can be one of several types. We use the vertical bar (|) to separate each type, so number | string | boolean is the type of a value that can be a number, a string, or a boolean.
+
+### Intersection Types
+
+Intersection types are closely related to union types, but they are used very differently. An intersection type combines multiple types into one using the ampersand, (&) or by extending types or interfaces. This allows you to add together existing types to get a single type that has all the features you need.
+
+### Type Guards
+
+A type guard is some expression that performs a runtime check that guarantees the type in some scope.
+
+To define a type guard, we simply need to define a function whose return type is a type predicate:
+
+### Discriminated Unions
+
+A common technique for working with unions is to have a single field which uses literal types which you can use to let TypeScript narrow down the possible current type.
+
+### Type Casting
+
+Type castings allow you to convert a variable from one type to another.
+
+In TypeScript, you can use the as keyword or <> operator for type castings.
+
+### Function Overloads
+
+JavaScript is inherently a very dynamic language. It’s not uncommon for a single JavaScript function to return different types of objects based on the shape of the arguments passed in.
+
+### Optional Chaining
+
+With optional chaining by using the quetion mark (?) symbol you can safely access nested properties and nested objects in our object data.
+
+### Nullish Coalescing
+
+The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
+
+Contrary to the logical OR (||) operator, the left operand is returned if it is a falsy value which is not null or undefined. In other words, if you use || to provide some default value to another variable foo, you may encounter unexpected behaviors if you consider some falsy values as usable (eg. '' or 0). See below for more examples.
