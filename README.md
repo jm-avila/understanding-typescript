@@ -320,3 +320,58 @@ With optional chaining by using the quetion mark (?) symbol you can safely acces
 The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
 
 Contrary to the logical OR (||) operator, the left operand is returned if it is a falsy value which is not null or undefined. In other words, if you use || to provide some default value to another variable foo, you may encounter unexpected behaviors if you consider some falsy values as usable (eg. '' or 0). See below for more examples.
+
+## Generics
+
+The implementation of generics in Typescript give us the ability to pass in a range of types to a component, adding an extra layer of abstraction and re-usability to your code. Generics can be applied to functions, interfaces and classes in Typescript.
+
+A generic type is a type which is connected to some other type and is very flexible regarding which type the other type is.
+
+Type variables are also referred to as type parameters.
+
+e.g.
+
+```
+    const firstNames: Array<string> = [""];
+    const lastNames: string[]> = [""];
+```
+
+Generic<T>
+
+T stands for Type, and is commonly used as the first type variable name when defining generics. But in reality T can be replaced with any valid name. Not only this, we are not limited to only one type variable — we can bring in any amount we wish to define.
+
+### Built-in generics:
+
+- Promise
+- Array
+- Readonly
+  - prevents properties of an object from being reassign any other values to it's name.
+- ReadonlyArray
+  - throws errors when array methods that mutate the original array are used.
+- ReturnType
+  - gets you the return type of any function, including functions inside classes.
+- Partial
+  - takes all properties from one type, and makes them optional. Partial<T> helps you getting autocomplete and type-checking.
+- Required
+  - Required<T> is the opposite to Partial<T>, makes every property necessary.
+- NonNullable
+  - helps ensure you don’t pass null or undefined to your functions. Complements strictNullChecks compiler flag, when active.
+- Pick
+  - With Pick<T, K extends keyof T> you can create a new type from an existing object, by only using a selected list of properties.
+- Record
+  - Record<K, T>, with it you can say that every key K should be of type T. It helps when dealing with other generic types.
+- Extract
+  - Extract<T, K> extracts all types from T that are assignable to K.
+- Exclude
+  - Exclude<T, K> excludes all types from T that are assignable to K. It’s like the opposite of Extract.
+- Omit
+  - Since version 3.5, TypeScript includes the Omit<T, K> helper type. Omit<T, K> is a shortcut for Pick<T, Exclude<keyof T, K>>.
+- Bottom line
+
+### Constraints
+
+A requirement on what T can be. To do so, we can create an interface that describes our constraint and use this interface and the extends keyword to denote our constraint.
+
+### Generic Clases
+
+When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions.
